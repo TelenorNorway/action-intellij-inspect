@@ -1,0 +1,6 @@
+name: "My Node Action"
+description: |
+  An action that runs with node.
+runs:
+  using: "node16"
+  main: "dist/main.js"

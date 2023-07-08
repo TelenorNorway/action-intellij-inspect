@@ -1,0 +1,13 @@
+{
+	"useTabs": true,
+	"trailingComma": "all",
+	"overrides": [
+		{
+			"files": ["package.json", "package-lock.json"],
+			"options": {
+				"tabWidth": 2,
+				"useTabs": false
+			}
+		}
+	]
+}
