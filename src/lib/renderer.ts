@@ -137,7 +137,7 @@ export function render() {
 				const columns = columnsAlts
 					.map(
 						(column, index) =>
-							column.sort((a, b) => b.weight - a.weight)?.[0]?.style?.("~") ??
+							column.sort((a, b) => b.weight - a.weight)?.[0]?.style?.("^") ??
 							source.originalCode
 								.at(line)
 								?.at(index)
@@ -151,7 +151,7 @@ export function render() {
 			}
 		}
 
-		console.log(str + "\n" + fileContentBottom);
+		console.log(white(str + "\n" + fileContentBottom) + "\u001b[0m");
 		for (const problem of source.problems) {
 			console.debug(
 				"%s:%d:%d-%d: %s",

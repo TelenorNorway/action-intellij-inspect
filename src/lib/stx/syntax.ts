@@ -7,6 +7,7 @@ import type { PrismTheme } from "./theme";
 import Prism from "prismjs";
 import { JSDOM } from "jsdom";
 import "./components";
+import { white } from "./colors";
 
 function processNodeTree(
 	theme: PrismTheme,
@@ -39,7 +40,7 @@ export function highlight(
 	const doc = new JSDOM(
 		Prism.highlight(text, Prism.languages[language], language),
 	);
-	return processNodeTree(theme, doc.window.document.body.childNodes);
+	return white(processNodeTree(theme, doc.window.document.body.childNodes));
 }
 
 export const languages = Prism.languages;

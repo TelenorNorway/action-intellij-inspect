@@ -179,7 +179,7 @@ export function strikethrough(str: string): string {
  * @param str text to make black
  */
 export function black(str: string): string {
-	return run(str, code([30], 39));
+	return run(str, code([30], 37));
 }
 
 /**
@@ -187,7 +187,7 @@ export function black(str: string): string {
  * @param str text to make red
  */
 export function red(str: string): string {
-	return run(str, code([31], 39));
+	return run(str, code([31], 37));
 }
 
 /**
@@ -195,7 +195,7 @@ export function red(str: string): string {
  * @param str text to make green
  */
 export function green(str: string): string {
-	return run(str, code([32], 39));
+	return run(str, code([32], 37));
 }
 
 /**
@@ -203,7 +203,7 @@ export function green(str: string): string {
  * @param str text to make yellow
  */
 export function yellow(str: string): string {
-	return run(str, code([33], 39));
+	return run(str, code([33], 37));
 }
 
 /**
@@ -211,7 +211,7 @@ export function yellow(str: string): string {
  * @param str text to make blue
  */
 export function blue(str: string): string {
-	return run(str, code([34], 39));
+	return run(str, code([34], 37));
 }
 
 /**
@@ -219,7 +219,7 @@ export function blue(str: string): string {
  * @param str text to make magenta
  */
 export function magenta(str: string): string {
-	return run(str, code([35], 39));
+	return run(str, code([35], 37));
 }
 
 /**
@@ -227,7 +227,7 @@ export function magenta(str: string): string {
  * @param str text to make cyan
  */
 export function cyan(str: string): string {
-	return run(str, code([36], 39));
+	return run(str, code([36], 37));
 }
 
 /**
@@ -235,7 +235,7 @@ export function cyan(str: string): string {
  * @param str text to make white
  */
 export function white(str: string): string {
-	return run(str, code([37], 39));
+	return run(str, code([37], 37));
 }
 
 /**
@@ -251,7 +251,7 @@ export function gray(str: string): string {
  * @param str text to make bright-black
  */
 export function brightBlack(str: string): string {
-	return run(str, code([90], 39));
+	return run(str, code([90], 37));
 }
 
 /**
@@ -259,7 +259,7 @@ export function brightBlack(str: string): string {
  * @param str text to make bright-red
  */
 export function brightRed(str: string): string {
-	return run(str, code([91], 39));
+	return run(str, code([91], 37));
 }
 
 /**
@@ -267,7 +267,7 @@ export function brightRed(str: string): string {
  * @param str text to make bright-green
  */
 export function brightGreen(str: string): string {
-	return run(str, code([92], 39));
+	return run(str, code([92], 37));
 }
 
 /**
@@ -275,7 +275,7 @@ export function brightGreen(str: string): string {
  * @param str text to make bright-yellow
  */
 export function brightYellow(str: string): string {
-	return run(str, code([93], 39));
+	return run(str, code([93], 37));
 }
 
 /**
@@ -283,7 +283,7 @@ export function brightYellow(str: string): string {
  * @param str text to make bright-blue
  */
 export function brightBlue(str: string): string {
-	return run(str, code([94], 39));
+	return run(str, code([94], 37));
 }
 
 /**
@@ -291,7 +291,7 @@ export function brightBlue(str: string): string {
  * @param str text to make bright-magenta
  */
 export function brightMagenta(str: string): string {
-	return run(str, code([95], 39));
+	return run(str, code([95], 37));
 }
 
 /**
@@ -299,7 +299,7 @@ export function brightMagenta(str: string): string {
  * @param str text to make bright-cyan
  */
 export function brightCyan(str: string): string {
-	return run(str, code([96], 39));
+	return run(str, code([96], 37));
 }
 
 /**
@@ -307,7 +307,7 @@ export function brightCyan(str: string): string {
  * @param str text to make bright-white
  */
 export function brightWhite(str: string): string {
-	return run(str, code([97], 39));
+	return run(str, code([97], 37));
 }
 
 /**
@@ -457,7 +457,7 @@ function clampAndTruncate(n: number, max = 255, min = 0): number {
  * @param color code
  */
 export function rgb8(str: string, color: number): string {
-	return run(str, code([38, 5, clampAndTruncate(color)], 39));
+	return run(str, code([38, 5, clampAndTruncate(color)], 37));
 }
 
 /**
@@ -491,7 +491,7 @@ export function rgb24(str: string, color: number | Rgb): string {
 			str,
 			code(
 				[38, 2, (color >> 16) & 0xff, (color >> 8) & 0xff, color & 0xff],
-				39,
+				37,
 			),
 		);
 	}
@@ -505,7 +505,7 @@ export function rgb24(str: string, color: number | Rgb): string {
 				clampAndTruncate(color.g),
 				clampAndTruncate(color.b),
 			],
-			39,
+			37,
 		),
 	);
 }
