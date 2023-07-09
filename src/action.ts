@@ -21,6 +21,7 @@ async function generateInspections(cwd: string) {
 		"idea" + ideaExecExt(),
 		[
 			"inspect",
+			cwd,
 			cwd + "/.idea/inspectionProfiles/Project_Default.xml",
 			cwd + "/.inspection_results",
 			"-v2",
