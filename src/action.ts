@@ -10,10 +10,10 @@ export default async function action() {
 	const inspectionDir = join(projectDir, ".inspection_results");
 
 	const cwd = process.cwd();
-	//await generateInspections(cwd);
+	await generateInspections(cwd);
 	findProblems(inspectionDir, projectDir);
 	render();
-	//await rmRF(process.cwd() + "/.inspection_results");
+	await rmRF(process.cwd() + "/.inspection_results");
 }
 
 async function generateInspections(cwd: string) {
