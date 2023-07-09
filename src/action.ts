@@ -42,6 +42,7 @@ async function generateInspections(cwd: string) {
 		],
 		{
 			ignoreReturnCode: true,
+			silent: true,
 			listeners: {
 				stdout: (data) => (out += data.toString()),
 				stderr: (data) => (out += data.toString()),
