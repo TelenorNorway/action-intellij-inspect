@@ -27,7 +27,6 @@ async function generateInspections() {
 			"json",
 		],
 		{
-			listeners: { stdout: (data) => (out += data.toString()) },
 			silent: true,
 			ignoreReturnCode: true,
 		},
