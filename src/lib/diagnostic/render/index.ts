@@ -22,7 +22,7 @@ const INDENT = " ".repeat(TAB_SIZE);
 const LINE_ENDING_REGEX = /\r?\n/g;
 const TAB_REGEX = /\t/g;
 
-const MESSAGE_HARD_WRAP_AT = 140;
+const MESSAGE_HARD_WRAP_AT = 120;
 const MESSAGE_MINIMUM_LENGTH = 20;
 const HARD_WRAP_WHEN = 60;
 
