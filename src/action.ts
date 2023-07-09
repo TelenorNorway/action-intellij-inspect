@@ -27,10 +27,7 @@ async function generateInspections(cwd: string) {
 			"-format",
 			"json",
 		],
-		{
-			silent: true,
-			ignoreReturnCode: true,
-		},
+		{},
 	);
 }
 
