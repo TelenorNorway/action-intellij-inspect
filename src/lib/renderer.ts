@@ -52,9 +52,6 @@ export function render() {
 			(1 + source.code.length).toString().length,
 		);
 		longestLine = Math.max(longestLine, file.length);
-		for (const line of source.code) {
-			longestLine = Math.max(longestLine, line.length);
-		}
 		for (const problem of source.problems) {
 			source.protectedLines[problem.line] = true;
 			for (let i = 1; i <= protectLinesAround; i++) {
@@ -66,6 +63,12 @@ export function render() {
 				}
 				source.linesToProblem[problem.line] ??= [];
 				source.linesToProblem[problem.line].push(problem);
+			}
+		}
+		for (let i = 0; i < source.code.length; i++) {
+			const line = source.code[i];
+			if (source.protectedLines[i]) {
+				longestLine = Math.max(longestLine, line.length);
 			}
 		}
 		for (let i = 0; i < source.protectedLines.length; i++) {
@@ -156,7 +159,7 @@ export function render() {
 			console.debug(
 				"%s:%d:%d-%d: %s",
 				file,
-				problem.line,
+				problem.line + 1,
 				problem.startsAt,
 				problem.startsAt + problem.length,
 				problem.message

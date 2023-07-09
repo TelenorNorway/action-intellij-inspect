@@ -6,14 +6,18 @@ import { render } from "./lib/renderer";
 import { rmRF } from "@actions/io";
 
 export default async function action() {
+	const dev = __filename.endsWith(".ts");
+
 	const projectDir = process.cwd();
 	const inspectionDir = join(projectDir, ".inspection_results");
 
-	const cwd = process.cwd();
-	await generateInspections(cwd);
+	if (!dev) {
+		const cwd = process.cwd();
+		await generateInspections(cwd);
+	}
 	findProblems(inspectionDir, projectDir);
 	render();
-	await rmRF(process.cwd() + "/.inspection_results");
+	if (!dev) await rmRF(process.cwd() + "/.inspection_results");
 }
 
 async function generateInspections(cwd: string) {
