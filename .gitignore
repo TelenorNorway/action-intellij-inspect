@@ -16,6 +16,7 @@
 !/package-lock.json
 !/README.md
 !/tsconfig.json
+!/src/lib/stx/README.md
 
 dist
 node_modules
