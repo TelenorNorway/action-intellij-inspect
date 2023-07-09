@@ -43,4 +43,16 @@ export function highlight(
 	return white(processNodeTree(theme, doc.window.document.body.childNodes));
 }
 
+export function tryHighlight(
+	theme: PrismTheme,
+	language: string,
+	text: string,
+): string | undefined {
+	try {
+		return highlight(theme, language, text);
+	} catch {
+		return undefined;
+	}
+}
+
 export const languages = Prism.languages;

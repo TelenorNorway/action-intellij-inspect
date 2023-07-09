@@ -1,9 +1,10 @@
 import { join } from "node:path";
 import { type } from "node:os";
 import { exec } from "@actions/exec";
-import { findProblems } from "./lib/problems";
-import { render } from "./lib/renderer";
 import { rmRF } from "@actions/io";
+import { collectDiagnostics } from "./lib/diagnostic/collect";
+import { emitFileDiagnostic } from "./lib/diagnostic/render";
+import { setFailed } from "@actions/core";
 
 export default async function action() {
 	const dev = __filename.endsWith(".ts");
@@ -15,13 +16,20 @@ export default async function action() {
 		const cwd = process.cwd();
 		await generateInspections(cwd);
 	}
-	findProblems(inspectionDir, projectDir);
-	render();
+	const diagnostics = collectDiagnostics(inspectionDir);
+	emitFileDiagnostic(diagnostics, projectDir);
 	if (!dev) await rmRF(process.cwd() + "/.inspection_results");
+	if (diagnostics.some((diagnostic) => diagnostic.error)) {
+		setFailed(
+			"One or more inspections has caused the job to fail, make sure to format your code right and fix errors and warnings in your code.",
+		);
+		process.exit(1);
+	}
 }
 
 async function generateInspections(cwd: string) {
-	await exec(
+	let out = "";
+	const code = await exec(
 		"idea" + ideaExecExt(),
 		[
 			"inspect",
@@ -32,8 +40,18 @@ async function generateInspections(cwd: string) {
 			"-format",
 			"json",
 		],
-		{},
+		{
+			ignoreReturnCode: true,
+			listeners: {
+				stdout: (data) => (out += data.toString()),
+				stderr: (data) => (out += data.toString()),
+			},
+		},
 	);
+	if (code !== 0) {
+		setFailed(out);
+		process.exit(1);
+	}
 }
 
 function ideaExecExt(os = type()) {
