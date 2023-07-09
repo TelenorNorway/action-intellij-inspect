@@ -294,7 +294,9 @@ function realPosFor(
 	column: number,
 ) {
 	const tabs = countTabs(codeFor(content, file, line, false), column);
-	return column - tabs + tabs * TAB_SIZE;
+	column -= tabs;
+	column += tabs * TAB_SIZE;
+	return column;
 }
 
 function countTabs(code: string, until: number) {
