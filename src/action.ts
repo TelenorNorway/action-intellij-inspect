@@ -9,19 +9,20 @@ export default async function action() {
 	const projectDir = process.cwd();
 	const inspectionDir = join(projectDir, ".inspection_results");
 
-	await generateInspections();
+	const cwd = process.cwd();
+	await generateInspections(cwd);
 	findProblems(inspectionDir, projectDir);
 	render();
 	await rmRF(process.cwd() + "/.inspection_results");
 }
 
-async function generateInspections() {
+async function generateInspections(cwd: string) {
 	await exec(
 		"idea" + ideaExecExt(),
 		[
 			"inspect",
-			".idea/inspectionProfiles/Project_Default.xml",
-			".inspection_results",
+			cwd + "/.idea/inspectionProfiles/Project_Default.xml",
+			cwd + "/.inspection_results",
 			"-v2",
 			"-format",
 			"json",
