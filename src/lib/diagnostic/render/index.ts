@@ -119,12 +119,13 @@ function renderSegment(
 					message.line,
 					message.offset,
 				);
-				const length = realPosFor(
-					originalLines,
-					segment.file,
-					message.line,
-					message.length,
-				);
+				const length =
+					realPosFor(
+						originalLines,
+						segment.file,
+						message.line,
+						message.offset + message.length,
+					) - offset;
 				str += "".padStart(offset + 1);
 				str += cursorStyle(HORIZONTAL_FULL.repeat(length));
 				const msgOffset = 5 + longestLineNumber + offset + length;
@@ -160,12 +161,13 @@ function renderSegment(
 					message.line,
 					message.offset,
 				);
-				const length = realPosFor(
-					originalLines,
-					segment.file,
-					message.line,
-					message.length,
-				);
+				const length =
+					realPosFor(
+						originalLines,
+						segment.file,
+						message.line,
+						message.offset + message.length,
+					) - offset;
 				setPos(lines, offset, 0);
 				write(lines, HORIZONTAL_FULL.repeat(length));
 				setStyler(lines, oldStyler);
@@ -177,12 +179,13 @@ function renderSegment(
 					message.line,
 					message.offset,
 				);
-				const length = realPosFor(
-					originalLines,
-					segment.file,
-					message.line,
-					message.length,
-				);
+				const length =
+					realPosFor(
+						originalLines,
+						segment.file,
+						message.line,
+						message.offset + message.length,
+					) - offset;
 				const middlePos = offset + Math.ceil(length / 2);
 				if (HORIZONTAL_FULL === getCharAt(lines, middlePos, 0)) {
 					replaceCharAt(lines, middlePos, 0, HORIZONTAL_DOWN);
@@ -197,12 +200,13 @@ function renderSegment(
 					message.line,
 					message.offset,
 				);
-				const length = realPosFor(
-					originalLines,
-					segment.file,
-					message.line,
-					message.length,
-				);
+				const length =
+					realPosFor(
+						originalLines,
+						segment.file,
+						message.line,
+						message.offset + message.length,
+					) - offset;
 				if (nLines === -1) {
 					setStyler(lines, (text) => cursorStyle(italic(text)));
 					const msgOffset = 5 + longestLineNumber + offset + length;
