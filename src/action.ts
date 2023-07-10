@@ -25,6 +25,17 @@ export default async function action() {
 		);
 		process.exit(1);
 	}
+	if (diagnostics.length) {
+		console.log(
+			"Your code is in compliance with the selected inspection profile, but it looks like it could be cleaned up a little bit more :)",
+		);
+	} else {
+		console.log(
+			"Your code is in complete compliance with the selected inspection profile!",
+		);
+		console.log();
+		console.log("You did a very good job! <3");
+	}
 }
 
 async function generateInspections(cwd: string) {
