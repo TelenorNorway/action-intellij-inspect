@@ -24,17 +24,24 @@ function getInspectionFiles(inspectionDir: string): string[] {
 	return readdirSync(inspectionDir)
 		.filter(
 			(name) =>
-				!(
-					name.startsWith(".") ||
-					!name.endsWith(".json") ||
-					!lstatSync(join(inspectionDir, name)).isFile()
-				),
+				!name.startsWith(".") &&
+				name.endsWith(".json") &&
+				name !== "DuplicatedCode_aggregate.json" &&
+				name !== "VulnerableLibrariesGlobal.json" &&
+				lstatSync(join(inspectionDir, name)).isFile,
 		)
 		.map((name) => join(inspectionDir, name));
 }
 
 function readInspectionFiles(files: string[]): WithProblems[] {
-	return files.map((path) => JSON.parse(readFileSync(path).toString()));
+	return files.map((path) => {
+		try {
+			return JSON.parse(readFileSync(path).toString());
+		} catch (ex) {
+			console.error(path, ex);
+			return { problems: [] };
+		}
+	});
 }
 
 function getFileDiagnosticsByProblem(
@@ -59,6 +66,7 @@ function getFileDiagnosticsByProblem(
 function transformProblemToDiagnosticMessage(
 	problem: WithProblems["problems"][number],
 ): DiagnosticMessage {
+	console.log(!problem.problem_class ? problem : "");
 	return {
 		line: problem.line--,
 		offset: problem.offset,

@@ -1,10 +1,10 @@
 import { join } from "node:path";
 import { type } from "node:os";
 import { exec } from "@actions/exec";
-import { rmRF } from "@actions/io";
 import { collectDiagnostics } from "./lib/diagnostic/collect";
 import { emitFileDiagnostic } from "./lib/diagnostic/render";
 import { setFailed } from "@actions/core";
+import { rmSync } from "node:fs";
 
 export default async function action() {
 	const dev = __filename.endsWith(".ts");
@@ -18,7 +18,11 @@ export default async function action() {
 	}
 	const diagnostics = collectDiagnostics(inspectionDir);
 	emitFileDiagnostic(diagnostics, projectDir);
-	if (!dev) await rmRF(process.cwd() + "/.inspection_results");
+	if (!dev)
+		await rmSync(process.cwd() + "/.inspection_results", {
+			force: true,
+			recursive: true,
+		});
 	if (diagnostics.some((diagnostic) => diagnostic.error)) {
 		setFailed(
 			"One or more inspections has caused the job to fail, make sure to format your code right and fix errors and warnings in your code.",

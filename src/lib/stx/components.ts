@@ -40,8 +40,6 @@ import "prismjs/components/prism-javastacktrace";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-jsdoc";
 import "prismjs/components/prism-json";
-import "prismjs/components/prism-json5";
-import "prismjs/components/prism-jsonp";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-kotlin";
 import "prismjs/components/prism-latex";

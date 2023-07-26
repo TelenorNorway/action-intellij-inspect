@@ -2,4 +2,5 @@
 module.exports = {
 	testEnvironment: "node",
 	passWithNoTests: true,
+	preset: "ts-jest",
 };

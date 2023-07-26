@@ -1,0 +1,12 @@
+*
+!/**/
+!/.gitignore
+!/action.yml
+!/LICENSE
+!/package.json
+!/package-lock.json
+!/README.md
+!/dist/**/*.js
+!/node_modules/**/*
+
+/dist/**/*.test.js
