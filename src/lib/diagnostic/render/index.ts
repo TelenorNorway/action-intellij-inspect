@@ -317,7 +317,7 @@ function codeFor(
 	line: number,
 	reset = true,
 ) {
-	return content[file][line] + (reset ? "\u001b[0m" : "");
+	return (content[file][line] ?? "") + (reset ? "\u001b[0m" : "");
 }
 
 function fixMaxLineOnCodeSegments(
@@ -327,11 +327,14 @@ function fixMaxLineOnCodeSegments(
 	let maxLineNumber = 0;
 
 	for (const segment of segments) {
-		segment.maxLines = Math.max(
+		segment.maxLines = Math.min(
 			segment.maxLines,
-			originalLines[segment.file].length,
+			originalLines[segment.file].length - 1,
 		);
-		maxLineNumber = Math.max(maxLineNumber, segment.maxLines);
+		maxLineNumber = Math.max(
+			maxLineNumber,
+			originalLines[segment.file].length - 1,
+		);
 	}
 
 	return (maxLineNumber + 1).toString().length;
