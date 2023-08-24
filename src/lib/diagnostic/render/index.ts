@@ -327,11 +327,11 @@ function fixMaxLineOnCodeSegments(
 	let maxLineNumber = 0;
 
 	for (const segment of segments) {
-		segment.maxLines = Math.min(
+		segment.maxLines = Math.max(
 			segment.maxLines,
-			originalLines[segment.file].length - 1,
+			originalLines[segment.file].length,
 		);
-		maxLineNumber = Math.max(segment.maxLines);
+		maxLineNumber = Math.max(maxLineNumber, segment.maxLines);
 	}
 
 	return (maxLineNumber + 1).toString().length;
