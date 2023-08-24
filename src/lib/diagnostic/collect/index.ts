@@ -66,7 +66,6 @@ function getFileDiagnosticsByProblem(
 function transformProblemToDiagnosticMessage(
 	problem: WithProblems["problems"][number],
 ): DiagnosticMessage {
-	console.log(!problem.problem_class ? problem : "");
 	return {
 		line: problem.line--,
 		offset: problem.offset,
