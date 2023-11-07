@@ -1,5 +1,5 @@
 {
-  "version": "UNVERSIONED",
+  "version": "0.2.0",
   "main": "dist/main.js",
   "scripts": {
     "ci:fmt": "prettier --check .",
