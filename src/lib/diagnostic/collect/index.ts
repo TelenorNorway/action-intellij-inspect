@@ -28,6 +28,7 @@ function getInspectionFiles(inspectionDir: string): string[] {
 				name.endsWith(".json") &&
 				name !== "DuplicatedCode_aggregate.json" &&
 				name !== "VulnerableLibrariesGlobal.json" &&
+				name !== "SpellCheckingInspection.json" &&
 				lstatSync(join(inspectionDir, name)).isFile,
 		)
 		.map((name) => join(inspectionDir, name));
